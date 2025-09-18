@@ -1,0 +1,29 @@
+body {
+  background-color: lightskyblue;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+} */
+
+#userTaskInput,
+#addTaskButton {
+  display: block;
+  margin: 10px auto;
+}
+
+.taskItem {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.delete-btn {
+    margin: 10px;
+}

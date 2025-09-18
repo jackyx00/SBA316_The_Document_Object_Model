@@ -27,7 +27,8 @@ document.body.appendChild(ul);
 template.id = "SingleTaskTemplate";
 span.className = "task";
 delButton.className = "delete-btn";
-delButton.textContent = "X";
+delButton.textContent = "❌";
+li.classList.add("taskItem");
 li.append(span, delButton);
 template.content.appendChild(li);
 
@@ -68,7 +69,6 @@ function handleAddClick(event) {
 
   // reuse template for each new task enter by user
   const newTask = template.content.cloneNode(true);
-  newTask.querySelector("li").classList.add("taskItem");
   newTask.querySelector(".task").textContent = taskInput.value;
   // add event listener for delete task
   newTask
