@@ -1,28 +1,19 @@
-const h1 = document.createElement("h1");
 const div = document.createElement("div");
-const taskInput = document.createElement("input");
-const addButton = document.createElement("button");
 const ul = document.createElement("ul");
 const li = document.createElement("li");
 const template = document.createElement("template");
 const span = document.createElement("span");
 const delButton = document.createElement("button");
 
-// title
-h1.textContent = "To-Do List";
-document.body.appendChild(h1);
+const taskInput = document.getElementById("userTaskInput");
+const addButton = document.getElementById("addTaskButton");
 
-// div for taskInput
-taskInput.id = "taskInput";
-taskInput.type = "text";
-taskInput.placeholder = "New task";
-
-addButton.id = "addTaskButton";
-addButton.textContent = "Add";
+// div for user input and add task button
 div.append(taskInput, addButton);
 document.body.appendChild(div);
 
 ul.id = "taskList";
+ul.style.listStyleType = "none";
 document.body.appendChild(ul);
 
 // template
@@ -33,16 +24,23 @@ delButton.textContent = "X";
 li.append(span, delButton);
 template.content.appendChild(li);
 
-function handleDelClick() {
-    
+function handleDelClick(event) {
+    event.target.parentNode.remove();
+    if (ul.children.length === 0) {
+    ul.style.border = "none";
+    }
 }
 
 function handleAddClick() {
     if (taskInput.value === "") return;
     const newTask = template.content.cloneNode(true);
+    newTask.querySelector("li").classList.add("taskItem");
     newTask.querySelector(".task").textContent = taskInput.value;
     newTask.querySelector(".delete-btn").addEventListener('click', handleDelClick);
     ul.appendChild(newTask);
+    ul.style.border = "2px solid black";  
+    ul.style.padding = "10px";
+    taskInput.value = "";
 }
 
 addButton.addEventListener('click', handleAddClick);
