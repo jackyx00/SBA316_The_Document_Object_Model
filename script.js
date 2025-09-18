@@ -25,14 +25,19 @@ li.append(span, delButton);
 template.content.appendChild(li);
 
 function handleDelClick(event) {
+  if (window.confirm("Are you sure you want to delete this task?")) {
     event.target.parentNode.remove();
     if (ul.children.length === 0) {
-    ul.style.border = "none";
+      ul.style.border = "none";
     }
+  }
 }
 
 function handleAddClick() {
-    if (taskInput.value === "") return;
+    if (taskInput.value === "") {
+        window.alert("Task is empty!");
+        return;
+    }
     const newTask = template.content.cloneNode(true);
     newTask.querySelector("li").classList.add("taskItem");
     newTask.querySelector(".task").textContent = taskInput.value;
