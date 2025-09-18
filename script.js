@@ -84,3 +84,8 @@ function handleAddClick(event) {
 taskForm.addEventListener("submit", handleAddClick);
 
 taskInput.focus();
+
+// alert pop-up for page refresh
+window.addEventListener("beforeunload", (event) => {
+  event.preventDefault();
+});
