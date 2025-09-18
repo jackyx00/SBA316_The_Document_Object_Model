@@ -1,4 +1,4 @@
-const div = document.createElement("div");
+const form = document.createElement("form");
 const ul = document.createElement("ul");
 const li = document.createElement("li");
 const template = document.createElement("template");
@@ -8,9 +8,14 @@ const delButton = document.createElement("button");
 const taskInput = document.getElementById("userTaskInput");
 const addButton = document.getElementById("addTaskButton");
 
-// div for user input and add task button
-div.append(taskInput, addButton);
-document.body.appendChild(div);
+// form for user input and add task button
+form.id = "addTaskForm";
+const taskForm = form;
+form.append(taskInput, addButton);
+taskInput.setAttribute("minlength", "3");
+taskInput.setAttribute("maxlength", "50");
+addButton.type = "submit";
+document.body.appendChild(form);
 
 ul.id = "taskList";
 ul.style.listStyleType = "none";
@@ -31,21 +36,27 @@ function handleDelClick(event) {
       ul.style.border = "none";
     }
   }
+  taskInput.focus();
 }
 
-function handleAddClick() {
+function handleAddClick(event) {
+    event.preventDefault();
     if (taskInput.value === "") {
-        window.alert("Task is empty!");
+        window.alert("Input is empty!");
+        taskInput.focus();
         return;
     }
     const newTask = template.content.cloneNode(true);
     newTask.querySelector("li").classList.add("taskItem");
     newTask.querySelector(".task").textContent = taskInput.value;
-    newTask.querySelector(".delete-btn").addEventListener('click', handleDelClick);
+    newTask.querySelector(".delete-btn").addEventListener("click", handleDelClick);
     ul.appendChild(newTask);
     ul.style.border = "2px solid black";  
     ul.style.padding = "10px";
     taskInput.value = "";
+    taskInput.focus();
 }
 
-addButton.addEventListener('click', handleAddClick);
+taskForm.addEventListener("submit", handleAddClick);
+
+taskInput.focus();
